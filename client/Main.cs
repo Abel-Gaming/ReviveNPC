@@ -1,4 +1,4 @@
-using CitizenFX.Core;
+﻿using CitizenFX.Core;
 using CitizenFX.Core.Native;
 using System;
 
@@ -9,15 +9,13 @@ namespace client
         public Main()
         {
             //Events
+            EventHandlers["ReviveNPC:DoCommand"] += new Action(RegisterReviveCommand);
             EventHandlers["ReviveNPC:TriggerClientRevive"] += new Action<int>(RevivePedClient);
-
-            //Commands
-            RegisterCommands();
         }
 
-        private static void RegisterCommands()
+        private static void RegisterReviveCommand()
         {
-            API.RegisterCommand("revive", new Action(RevivePed), false);
+            RevivePed();
         }
 
         private static async void RevivePed()
